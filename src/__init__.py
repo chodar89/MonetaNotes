@@ -1,15 +1,21 @@
+import os
+
 from flask_openapi3 import Info, OpenAPI, Tag
+from flask_sqlalchemy import SQLAlchemy
 from pydantic import BaseModel
 
 info = Info(title="MonetaNotes", version="1.0.0")
-
 
 ping_tag = Tag(name="ping", description="test tag")
 
 # instantiate the app
 app = OpenAPI(__name__, info=info)
 
-app.config.from_object("src.config.DevelopmentConfig")
+# set flask app config
+app.config.from_object(os.getenv("APP_SETTINGS"))
+
+# initiate db
+db = SQLAlchemy(app)
 
 
 class PingQuery(BaseModel):
