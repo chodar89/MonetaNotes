@@ -1,4 +1,5 @@
 import os
+from typing import Optional
 
 from flask_openapi3 import Info, OpenAPI, Tag
 from flask_sqlalchemy import SQLAlchemy
@@ -19,7 +20,7 @@ db = SQLAlchemy(app)
 
 
 class PingQuery(BaseModel):
-    id: int
+    id: Optional[int]
 
 
 @app.get("/", tags=[ping_tag])
