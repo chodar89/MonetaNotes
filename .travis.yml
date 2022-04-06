@@ -6,9 +6,15 @@ python:
 services:
   - docker
 
-before_script: pip install black isort flake8
-
-script:
-  - black . --check
-  - isort . --check
-  - flake8 .
+jobs:
+  include:
+    - stage: Linting
+      script:
+        - pip install black isort flake8
+        - black . --check
+        - isort . --check
+        - flake8 .
+    - stage: Test
+      script:
+        - pip install -r requirements.txt
+        - pytest src/tests

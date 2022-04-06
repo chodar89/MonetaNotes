@@ -8,6 +8,7 @@ class BaseConfig:
     TESTING: bool = False
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
     FLASK_DEBUG: int = 1
+    JWT_SECRET_KEY: Optional[str] = os.environ.get("JWT_SECRET_KEY")
 
 
 class DevelopmentConfig(BaseConfig):
