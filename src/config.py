@@ -4,8 +4,10 @@ from typing import Optional
 
 
 class BaseConfig:
+    SECRET_KEY: Optional[str] = os.environ.get("SECRET_KEY")
     TESTING: bool = False
     SQLALCHEMY_TRACK_MODIFICATIONS: bool = False
+    FLASK_DEBUG: int = 1
 
 
 class DevelopmentConfig(BaseConfig):
@@ -13,7 +15,7 @@ class DevelopmentConfig(BaseConfig):
 
 
 class TestingConfig(BaseConfig):
-    TESTING = True
+    TESTING: bool = True
     SQLALCHEMY_DATABASE_URI: Optional[str] = os.environ.get(
         "DATABASE_TEST_URL"
     )
@@ -21,3 +23,4 @@ class TestingConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI: Optional[str] = os.environ.get("DATABASE_URL")
+    DEBUG = False
